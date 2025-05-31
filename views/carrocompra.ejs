@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Carrito de Compras</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="product-page-container">
+        <div class="header-bar">
+            <a href="/" class="icon"><i class="fas fa-home"></i></a> 
+            
+            <a href="/inicio" class="icon"><i class="fas fa-store"></i></a> 
+            
+            <% if (user) { %>
+                <a href="/perfil" class="icon"><i class="fas fa-user"></i></a> 
+            <% } %>
+            
+            <a href="/carrocompra" class="icon"><i class="fas fa-shopping-cart"></i></a> 
+        </div>
+
+        <h2 class="product-page-title">Tu Carrito de Compras</h2>
+
+        <div class="cart-content">
+            <% if (cart && cart.length > 0) { %> 
+                <ul class="cart-items">
+                    <% cart.forEach(function(item, index) { %> 
+                        <li class="cart-item">
+                            <img src="<%= item.imagen %>" alt="<%= item.nombre %>" class="cart-item-image"> 
+                            <div class="item-details">
+                                <h3><%= item.nombre %></h3>
+                                <p>Precio: $<%= item.precio.toFixed(2) %> Mxn</p>
+                                <p>Cantidad: <%= item.cantidad %></p>
+                                <p>Subtotal: $<%= (item.precio * item.cantidad).toFixed(2) %> Mxn</p>
+                            </div>
+                            <form action="/eliminar-del-carrito" method="POST">
+                                <input type="hidden" name="index" value="<%= index %>"> 
+                                <button type="submit" class="remove-button">
+                                    <i class="fas fa-times remove-icon"></i>
+                                    <span class="visually-hidden">Eliminar</span> 
+                                </button>
+                            </form>
+                        </li>
+                    <% }); %>
+                </ul>
+                <div class="cart-summary">
+                    <p>Total de productos: <%= cart.length %></p> 
+                    <p>Total a pagar: $<%= total.toFixed(2) %> Mxn</p>
+                    <div class="cart-actions">
+                        <button class="checkout-button" onclick="location.href='/formapago'">Proceder al Pago</button>
+                        <a href="/inicio" class="continue-shopping-button">Seguir Comprando</a>
+                        <form action="/vaciar-carrito" method="POST">
+                            <button type="submit" class="button-danger">Vaciar Carrito</button>
+                        </form>
+                    </div>
+                </div>
+            <% } else { %>
+                <p class="empty-cart-message">Tu carrito está vacío.</p>
+                <a href="/inicio" class="continue-shopping-button">Explorar Productos</a>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

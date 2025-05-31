@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfumería de Dama</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="product-page-container">
+        <div class="header-bar">
+            <a href="/" class="icon"><i class="fas fa-home"></i></a>
+            <a href="/carrocompra" class="icon"><i class="fas fa-shopping-cart"></i></a>
+            <a href="/perfil" class="icon"><i class="fas fa-user"></i></a>
+        </div>
+
+        <h2 class="product-page-title">Perfumería de Dama</h2>
+
+        <div class="product-grid">
+            <div class="product-item"> <img src="/images/ariana.jpg" alt="Ariana Grande - Ari Spray">
+                <h3>Ariana Grande - Ari Spray 3.4 onzas</h3>
+                <p class="price">$800.00 Mxn</p> <form action="/agregar-al-carrito" method="POST">
+                    <input type="hidden" name="nombre" value="Ariana Grande - Ari Spray">
+                    <input type="hidden" name="precio" value="800.00">
+                    <input type="hidden" name="imagen" value="/images/ariana-grande.jpg">
+                    <button type="submit" class="buy-button">Comprar</button> </form>
+            </div>
+
+            <div class="product-item">
+                <img src="/images/versace.jpg" alt="Versace">
+                <h3>Versace 3.4 onzas</h3>
+                <p class="price">$800.00 Mxn</p>
+                <form action="/agregar-al-carrito" method="POST">
+                    <input type="hidden" name="nombre" value="Versace 3.4 onzas">
+                    <input type="hidden" name="precio" value="800.00">
+                    <input type="hidden" name="imagen" value="/images/versace.jpg">
+                    <button type="submit" class="buy-button">Comprar</button>
+                </form>
+            </div>
+
+            <div class="product-item">
+                <img src="/images/ch.jpg" alt="Carolina Herrera">
+                <h3>Carolina Herrera 3.4 onzas</h3>
+                <p class="price">$800.00 Mxn</p>
+                <form action="/agregar-al-carrito" method="POST">
+                    <input type="hidden" name="nombre" value="Carolina Herrera 3.4 onzas">
+                    <input type="hidden" name="precio" value="800.00">
+                    <input type="hidden" name="imagen" value="/images/carolina-herrera.jpg">
+                    <button type="submit" class="buy-button">Comprar</button>
+                </form>
+            </div>
+            </div>
+    </div>
+</body>
+</html>

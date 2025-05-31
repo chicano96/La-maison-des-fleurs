@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfumeria de Caballero</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="product-page-container">
+        <div class="header-bar">
+            <a href="/" class="icon"><i class="fas fa-home"></i></a>
+            <a href="/carrocompra" class="icon"><i class="fas fa-shopping-cart"></i></a>
+            <a href="/inicio" class="icon"><i class="fas fa-store"></i></a>
+            <% if (typeof user !== 'undefined' && user) { %>
+                <a href="/perfil" class="icon"><i class="fas fa-user"></i></a>
+            <% } %>
+        </div>
+
+        <h1 class="product-page-title">Perfumeria de caballero</h1>
+
+        <div class="product-grid">
+            <div class="product-item product-card"> <img src="/images/nautica.png" alt="Nautica Voyage">
+                <h3>Nautica - Voyage by Spray de 3.4 oz</h3>
+                <p class="price">$300.00 Mxn</p>
+                <form action="/agregar-al-carrito" method="POST">
+                    <input type="hidden" name="nombre" value="Nautica Voyage by Spray">
+                    <input type="hidden" name="precio" value="300.00">
+                    <input type="hidden" name="imagen" value="/images/nautica.png">
+                    <button type="submit" class="buy-button">Comprar</button>
+                </form>
+            </div>
+
+            <div class="product-item product-card"> <img src="/images/CK.jpg" alt="Calvin Klein">
+                <h3>Calvin Klein - Calvin Klein by Spray de 3.4 oz</h3>
+                <p class="price">$300.00 Mxn</p>
+                <form action="/agregar-al-carrito" method="POST">
+                    <input type="hidden" name="nombre" value="Calvin Klein by Spray">
+                    <input type="hidden" name="precio" value="300.00">
+                    <input type="hidden" name="imagen" value="/images/CK.jpg">
+                    <button type="submit" class="buy-button">Comprar</button>
+                </form>
+            </div>
+
+            <div class="product-item product-card"> <img src="/images/mont.jpg" alt="Mont Blanc">
+                <h3>Mont Blanc - Mont Blanc by Spray de 3.4 oz</h3>
+                <p class="price">$300.00 Mxn</p>
+                <form action="/agregar-al-carrito" method="POST">
+                    <input type="hidden" name="nombre" value="Mont Blanc by Spray">
+                    <input type="hidden" name="precio" value="300.00">
+                    <input type="hidden" name="imagen" value="/images/mont.jpg">
+                    <button type="submit" class="buy-button">Comprar</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="profile-container">
+        <div class="top-button-container">
+            <a href="/inicio" class="button button-secondary">Ir a la Tienda</a>
+        </div>
+
+        <h2>Información Personal</h2>
+
+        <% // --- BLOQUE PARA MOSTRAR MENSAJES FLASH --- %>
+        <% if (success_msg && success_msg.length > 0) { %>
+            <div class="alert alert-success">
+                <%= success_msg %>
+            </div>
+        <% } %>
+
+        <% if (error_msg && error_msg.length > 0) { %>
+            <div class="alert alert-danger">
+                <%= error_msg %>
+            </div>
+        <% } %>
+        <% // ------------------------------------------ %>
+
+        <div class="form-group">
+            <label>Nombre completo:</label>
+            <input type="text" value="<%= user.nombre_completo %>" readonly>
+        </div>
+        <div class="form-group">
+            <label>Correo electrónico:</label>
+            <input type="email" value="<%= user.correo %>" readonly>
+        </div>
+        <div class="form-group">
+            <label>Número telefónico:</label>
+            <input type="tel" value="<%= user.numero_telefonico %>" readonly>
+        </div>
+
+        <h3>Dirección</h3>
+        <div class="form-group">
+            <label>Ciudad:</label>
+            <input type="text" value="<%= user.ciudad %>" readonly>
+        </div>
+        <div class="form-group">
+            <label>Dirección:</label>
+            <input type="text" value="<%= user.direccion %>" readonly>
+        </div>
+
+        <div class="button-container">
+            <a href="/perfil/modificar" class="button button-primary">Modificar Perfil</a>
+            <a href="/logout" class="button button-danger">Cerrar Sesión</a>
+        </div>
+    </div>
+</body>
+</html>

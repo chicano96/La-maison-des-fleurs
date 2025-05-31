@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Perfil</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="register-container"> <h2>MODIFICAR PERFIL</h2>
+
+        <% // --- BLOQUE PARA MOSTRAR MENSAJES FLASH --- %>
+        <% if (success_msg && success_msg.length > 0) { %>
+            <div class="alert alert-success">
+                <%= success_msg %>
+            </div>
+        <% } %>
+
+        <% if (error_msg && error_msg.length > 0) { %>
+            <div class="alert alert-danger">
+                <%= error_msg %>
+            </div>
+        <% } %>
+        <% // ------------------------------------------ %>
+
+        <form action="/perfil/modificar" method="POST">
+            <div class="form-group">
+                <label for="nombre_completo">Nombre completo:</label>
+                <input type="text" id="nombre_completo" name="nombre_completo" value="<%= user.nombre_completo %>" required>
+            </div>
+            <div class="form-group">
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" name="correo" value="<%= user.correo %>" required readonly>
+            </div>
+            <div class="form-group">
+                <label for="password">Nueva Contraseña (dejar en blanco para no cambiar):</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirmar Nueva Contraseña:</label>
+                <input type="password" id="confirm_password" name="confirm_password">
+            </div>
+            <div class="form-group">
+                <label for="ciudad">Ciudad:</label>
+                <input type="text" id="ciudad" name="ciudad" value="<%= user.ciudad %>" required>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" value="<%= user.direccion %>" required>
+            </div>
+            <div class="form-group">
+                <label for="numero_telefonico">Número telefónico:</label>
+                <input type="tel" id="numero_telefonico" name="numero_telefonico" value="<%= user.numero_telefonico %>" required>
+            </div>
+            <button type="submit" class="register-button">GUARDAR CAMBIOS</button>
+        </form>
+        <p><a href="/perfil">Volver a mi perfil</a></p>
+    </div>
+</body>
+</html>
