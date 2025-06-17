@@ -5,16 +5,16 @@ const productSchema = new mongoose.Schema({
     nombre: String,
     precio: Number,
     cantidad: Number,
-    // Puedes añadir más campos como id del producto si vienen de otra colección
+    // Aca podemos añadir más campos como id del producto si vienen de otra colección
 });
 
 const orderSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Hace referencia al modelo 'User'
+        ref: 'User',
         required: true
     },
-    productos: [productSchema], // Un array de productos comprados
+    productos: [productSchema], 
     total: {
         type: Number,
         required: true
