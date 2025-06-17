@@ -1123,3 +1123,327 @@ body.fondo-perfumeria-index .button:hover {
     color: #777;
     padding: 50px 0;
 }
+
+/* --- Estilos Generales para el Contenedor y Títulos --- */
+.container {
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco semi-transparente */
+    padding: 40px;
+    border-radius: 12px; /* Bordes más redondeados */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    text-align: center;
+    max-width: 600px; /* Ancho máximo para formularios */
+    margin: 40px auto; /* Centrar y añadir margen superior/inferior */
+    color: #333; /* Color de texto oscuro para mayor legibilidad */
+}
+
+h2, h3, h4 {
+    font-family: 'Georgia', serif; /* Una fuente más elegante para los títulos */
+    color: #5d4037; /* Tono marrón oscuro/café para los títulos */
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+}
+
+h2 {
+    font-size: 2.2em;
+    border-bottom: 2px solid #ecd8c0; /* Línea decorativa bajo el título principal */
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+h3 {
+    font-size: 1.6em;
+    color: #795548; /* Un tono más claro de marrón */
+}
+
+h4 {
+    font-size: 1.3em;
+    color: #8d6e63;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+/* --- Estilos para Mensajes Flash (Alertas) --- */
+.alert {
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 1em;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* --- Estilos del Resumen del Pedido --- */
+.cart-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #fcfcfc;
+}
+
+.cart-items-list li {
+    padding: 12px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.05em;
+    color: #555;
+}
+
+.cart-items-list li:last-child {
+    border-bottom: none;
+}
+
+.cart-total {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #5d4037;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 2px solid #ecd8c0; /* Línea similar a la del título principal */
+    text-align: right; /* Alineación del total a la derecha */
+}
+
+
+/* --- Estilos del Formulario de Pago --- */
+.payment-form .form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Alinea etiquetas y campos a la izquierda */
+}
+
+.payment-form label {
+    display: block; /* Cada etiqueta en su propia línea */
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #6d4c41; /* Un color ligeramente más claro para las etiquetas */
+    font-size: 0.95em;
+}
+
+.payment-form input[type="text"] {
+    width: calc(100% - 24px); /* Ancho completo menos padding */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.payment-form input[type="text"]:focus {
+    border-color: #a1887f; /* Color de borde al enfocar */
+    box-shadow: 0 0 0 3px rgba(161, 136, 127, 0.2); /* Sombra suave al enfocar */
+    outline: none; /* Elimina el contorno predeterminado del navegador */
+}
+
+.payment-form .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Espacio entre los campos en la misma fila */
+    margin-bottom: 20px;
+}
+
+.payment-form .form-row .form-group {
+    flex: 1; /* Distribuye el espacio equitativamente */
+    margin-bottom: 0; /* Elimina margen inferior extra si el form-row ya lo tiene */
+}
+
+/* --- Estilos para los botones (asumiendo .btn y .btn-primary existentes) --- */
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px; /* Espacio superior para botones */
+}
+
+.btn-primary {
+    background-color: #795548; /* Un marrón más oscuro */
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #5d4037; /* Tono más oscuro al pasar el ratón */
+    transform: translateY(-2px); /* Efecto ligero de elevación */
+}
+
+.btn-secondary { /* Si usas este para "Ver mis Pedidos" en la confirmación */
+    background-color: #ccc;
+    color: #333;
+    margin-left: 15px;
+}
+
+.btn-secondary:hover {
+    background-color: #bbb;
+    transform: translateY(-2px);
+}
+
+/* --- Estilos para Información de Envío (del perfil) --- */
+.payment-form h4 + p { /* Estilo para el primer párrafo después de h4 */
+    margin-top: 15px;
+}
+
+.payment-form p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.payment-form p strong {
+    color: #444;
+}
+
+.payment-form p a {
+    color: #795548; /* Color de enlace que combine con el tema */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.payment-form p a:hover {
+    text-decoration: underline;
+}
+
+/* --- Responsive Básico para pantallas pequeñas --- */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        padding: 25px;
+        border-radius: 8px;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    .payment-form .form-row {
+        flex-direction: column; /* Apila los campos en filas en pantallas pequeñas */
+        gap: 0; /* Elimina el espacio entre ellos si se apilan */
+    }
+
+    .payment-form .form-row .form-group {
+        margin-bottom: 20px; /* Restaura el margen inferior cuando se apilan */
+    }
+
+    .payment-form input[type="text"] {
+        width: 100%; /* Asegura que los campos usen todo el ancho disponible */
+    }
+}
+
+/* --- Estilos para el Historial de Pedidos (mispedidos.ejs) --- */
+.order-list {
+    margin-top: 30px;
+    display: grid; /* Usa CSS Grid para una mejor organización de tarjetas */
+    gap: 25px; /* Espacio entre las tarjetas de pedido */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Diseños responsivos de columnas */
+}
+
+.order-card {
+    background-color: #f8f8f8; /* Fondo ligeramente diferente para cada tarjeta */
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Sombra más pronunciada para destacar tarjetas */
+    text-align: left;
+    transition: transform 0.2s ease-in-out;
+}
+
+.order-card:hover {
+    transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
+}
+
+.order-card h3 {
+    font-size: 1.4em;
+    color: #5d4037;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.order-card p {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.order-card p strong {
+    color: #333;
+}
+
+.order-status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+    display: inline-block; /* Para que padding funcione */
+    text-transform: capitalize; /* Capitaliza la primera letra */
+}
+
+/* Colores para diferentes estados de pedido */
+.order-status.pendiente {
+    background-color: #fff3cd; /* Amarillo claro */
+    color: #856404; /* Amarillo oscuro */
+}
+
+.order-status.procesando {
+    background-color: #d1ecf1; /* Azul claro */
+    color: #0c5460; /* Azul oscuro */
+}
+
+.order-status.enviado {
+    background-color: #d4edda; /* Verde claro */
+    color: #155724; /* Verde oscuro */
+}
+
+.order-status.entregado {
+    background-color: #e2f0d9; /* Verde muy claro */
+    color: #28a745; /* Verde fuerte */
+}
+
+.order-status.cancelado {
+    background-color: #f8d7da; /* Rojo claro */
+    color: #721c24; /* Rojo oscuro */
+}
+
+.order-card h4 {
+    font-size: 1.1em;
+    color: #795548;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.order-products {
+    list-style: disc; /* Puntos de lista */
+    padding-left: 25px; /* Indentación para la lista */
+    margin-top: 0;
+}
+
+.order-products li {
+    margin-bottom: 5px;
+    color: #666;
+}
+
+/* Ajuste responsive para la lista de pedidos */
+@media (max-width: 600px) {
+    .order-list {
+        grid-template-columns: 1fr; /* Una columna en pantallas muy pequeñas */
+    }
+}
