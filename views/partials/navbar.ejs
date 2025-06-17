@@ -1,0 +1,18 @@
+<nav class="navbar">
+    <div class="navbar-brand">
+        <a href="/">La Maison des Fleurs</a>
+    </div>
+    <ul class="navbar-links">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/caballero">Caballero</a></li>
+        <li><a href="/dama">Dama</a></li>
+        <li><a href="/carrocompra">Carrito (<%= cart.length %>)</a></li>
+        <% if (user) { %>
+            <li><a href="/perfil">Perfil (<%= user.nombre_completo %>)</a></li>
+            <li><a href="/perfil/mis-pedidos">Mis Pedidos</a></li> <li><a href="/logout">Cerrar Sesión</a></li>
+        <% } else { %>
+            <li><a href="/login">Iniciar Sesión</a></li>
+            <li><a href="/registro">Registrarse</a></li>
+        <% } %>
+    </ul>
+</nav>
