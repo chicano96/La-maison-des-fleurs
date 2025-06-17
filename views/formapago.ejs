@@ -1,115 +1,89 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forma de Pago - Perfumería</title>
-    <link rel="stylesheet" href="/css/style.css"> <%-- Asegúrate de que esta ruta sea correcta --%>
+    <title>Forma de Pago - La Maison des Fleurs</title>
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
-    <div class="header">
-        <h1>Proceso de Pago</h1>
-        <div class="nav-icons">
-            <a href="/"><img src="/images/home-icon.png" alt="Inicio"></a>
-            <a href="/inicio"><img src="/images/store-icon.png" alt="Ir a la Tienda"></a>
-            <% if (user) { %>
-                <a href="/perfil"><img src="/images/user-icon.png" alt="Perfil"></a>
-            <% } %>
-            <a href="/carrocompra"><img src="/images/cart-icon.png" alt="Carrito de Compra"></a>
+
+<body class="fondo-perfumeria-index">
+    <%- include('partials/navbar') %>
+        <div class="container">
+            <h2>Información de Pago</h2>
+
+            <% if (success_msg.length> 0) { %>
+                <div class="alert alert-success">
+                    <%= success_msg %>
+                </div>
+                <% } %>
+                    <% if (error_msg.length> 0) { %>
+                        <div class="alert alert-danger">
+                            <%= error_msg %>
+                        </div>
+                        <% } %>
+
+                            <h3>Resumen del Pedido</h3>
+                            <ul class="cart-items-list">
+                                <% cart.forEach(item=> { %>
+                                    <li>
+                                        <%= item.nombre %> x <%= item.cantidad %> - $<%= (item.precio *
+                                                    item.cantidad).toFixed(2) %>
+                                    </li>
+                                    <% }); %>
+                            </ul>
+                            <p class="cart-total">Total a Pagar: $<%= total.toFixed(2) %>
+                            </p>
+
+                            <form action="/procesar-pago" method="POST" class="payment-form">
+                                <h4>Detalles de la Tarjeta</h4>
+                                <div class="form-group">
+                                    <label for="cardNumber">Número de Tarjeta:</label>
+                                    <input type="text" id="cardNumber" name="cardNumber"
+                                        placeholder="XXXX XXXX XXXX XXXX" required pattern="[0-9]{13,19}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardName">Nombre en la Tarjeta:</label>
+                                    <input type="text" id="cardName" name="cardName" required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group half-width">
+                                        <label for="expiryMonth">Mes de Vencimiento:</label>
+                                        <input type="text" id="expiryMonth" name="expiryMonth" placeholder="MM" required
+                                            pattern="(0[1-9]|1[0-2])">
+                                    </div>
+                                    <div class="form-group half-width">
+                                        <label for="expiryYear">Año de Vencimiento:</label>
+                                        <input type="text" id="expiryYear" name="expiryYear" placeholder="AAAA" required
+                                            pattern="[0-9]{4}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvv">CVV:</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="XXX" required
+                                        pattern="[0-9]{3,4}">
+                                </div>
+
+                                <h4>Información de Envío (del perfil)</h4>
+                                <p><strong>Nombre Completo:</strong>
+                                    <%= user.nombre_completo %>
+                                </p>
+                                <p><strong>Dirección:</strong>
+                                    <%= user.direccion %>, <%= user.ciudad %>
+                                </p>
+                                <p><strong>Teléfono:</strong>
+                                    <%= user.numero_telefonico %>
+                                </p>
+                                <p>Por favor, asegúrate de que tu información de perfil sea correcta. Si necesitas
+                                    cambiarla, ve a tu <a href="/perfil/modificar">perfil</a>.</p>
+
+                                <button type="submit" class="btn btn-primary">Confirmar y Pagar</button>
+                            </form>
         </div>
-    </div>
 
-    <div class="payment-container">
-        <% // --- BLOQUE PARA MOSTRAR MENSAJES FLASH --- %>
-        <% if (success_msg && success_msg.length > 0) { %>
-            <div class="alert alert-success">
-                <%= success_msg %>
-            </div>
-        <% } %>
-
-        <% if (error_msg && error_msg.length > 0) { %>
-            <div class="alert alert-danger">
-                <%= error_msg %>
-            </div>
-        <% } %>
-        <% // ------------------------------------------ %>
-
-        <div class="cart-summary-payment">
-            <h2>Resumen del Pedido</h2>
-            <% if (cart && cart.length > 0) { %>
-                <ul>
-                    <% cart.forEach(item => { %>
-                        <li>
-                            <%= item.nombre %> (x<%= item.cantidad %>) - $<%= (item.precio * item.cantidad).toFixed(2) %>
-                        </li>
-                    <% }); %>
-                </ul>
-                <p class="total">Total a pagar: <strong>$<%= total.toFixed(2) %> MXN</strong></p>
-            <% } else { %>
-                <p>Tu carrito está vacío. Por favor, regresa a la <a href="/inicio">tienda</a>.</p>
-            <% } %>
-        </div>
-
-        <% if (cart && cart.length > 0) { %>
-            <form action="/procesar-pago" method="POST" class="payment-form">
-                <h2>Información de Envío</h2>
-                <div class="form-group">
-                    <label for="nombre_envio">Nombre Completo:</label>
-                    <input type="text" id="nombre_envio" name="nombre_envio" value="<%= user ? user.username : '' %>" required>
-                </div>
-                <div class="form-group">
-                    <label for="direccion">Dirección:</label>
-                    <input type="text" id="direccion" name="direccion" required>
-                </div>
-                <div class="form-group">
-                    <label for="ciudad">Ciudad:</label>
-                    <input type="text" id="ciudad" name="ciudad" required>
-                </div>
-                <div class="form-group">
-                    <label for="estado">Estado:</label>
-                    <input type="text" id="estado" name="estado" required>
-                </div>
-                <div class="form-group">
-                    <label for="codigo_postal">Código Postal:</label>
-                    <input type="text" id="codigo_postal" name="codigo_postal" required>
-                </div>
-                <div class="form-group">
-                    <label for="telefono">Teléfono:</label>
-                    <input type="tel" id="telefono" name="telefono" required>
-                </div>
-
-                <h2>Detalles de Pago</h2>
-                <div class="form-group">
-                    <label for="tipo_tarjeta">Tipo de Tarjeta:</label>
-                    <select id="tipo_tarjeta" name="tipo_tarjeta" required>
-                        <option value="">Selecciona</option>
-                        <option value="visa">Visa</option>
-                        <option value="mastercard">Mastercard</option>
-                        <option value="amex">American Express</option>
-                        <option value="paypal">PayPal</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="numero_tarjeta">Número de Tarjeta:</label>
-                    <input type="text" id="numero_tarjeta" name="numero_tarjeta" pattern="[0-9]{13,16}" title="Debe ser entre 13 y 16 dígitos" required>
-                </div>
-                <div class="form-group form-group-inline">
-                    <label for="fecha_expiracion">Fecha de Expiración (MM/AA):</label>
-                    <input type="text" id="fecha_expiracion" name="fecha_expiracion" placeholder="MM/AA" pattern="(0[1-9]|1[0-2])\/?([0-9]{2})" title="Formato MM/AA" required>
-                </div>
-                <div class="form-group form-group-inline">
-                    <label for="cvv">CVV:</label>
-                    <input type="text" id="cvv" name="cvv" pattern="[0-9]{3,4}" title="3 o 4 dígitos" required>
-                </div>
-                <div class="form-group">
-                    <label for="nombre_titular">Nombre del Titular de la Tarjeta:</label>
-                    <input type="text" id="nombre_titular" name="nombre_titular" required>
-                </div>
-
-                <button type="submit" class="button button-primary">Confirmar Compra</button>
-            </form>
-        <% } %>
-    </div>
+        <%- include('partials/footer') %>
 </body>
+
 </html>
