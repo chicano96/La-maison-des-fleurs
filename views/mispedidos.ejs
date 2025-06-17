@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pedidos - La Maison des Fleurs</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="fondo-perfumeria-index">
+    <%- include('partials/navbar') %>
+
+    <div class="container">
+        <h2>Mi Historial de Pedidos</h2>
+
+        <% if (success_msg.length > 0) { %>
+            <div class="alert alert-success"><%= success_msg %></div>
+        <% } %>
+        <% if (error_msg.length > 0) { %>
+            <div class="alert alert-danger"><%= error_msg %></div>
+        <% } %>
+
+        <% if (orders && orders.length > 0) { %>
+            <div class="order-list">
+                <% orders.forEach(order => { %>
+                    <div class="order-card">
+                        <h3>Pedido #<%= order._id.toString().substring(18).toUpperCase() %></h3> <p><strong>Fecha:</strong> <%= new Date(order.fecha).toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+                        <p><strong>Estado:</strong> <span class="order-status <%= order.estado %>"><%= order.estado.charAt(0).toUpperCase() + order.estado.slice(1) %></span></p>
+                        <p><strong>Total:</strong> $<%= order.total.toFixed(2) %></p>
+
+                        <h4>Productos del Pedido:</h4>
+                        <ul class="order-products">
+                            <% order.productos.forEach(product => { %>
+                                <li>
+                                    <%= product.nombre %> (x<%= product.cantidad %>) - $<%= (product.precio * product.cantidad).toFixed(2) %>
+                                </li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <p>Aún no has realizado ningún pedido.</p>
+            <p><a href="/dama" class="btn btn-primary">Explorar nuestros productos</a></p>
+        <% } %>
+    </div>
+
+    <%- include('partials/footer') %>
+</body>
+</html>
