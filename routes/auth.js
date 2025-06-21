@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const User = require('../models/User'); 
+const User = require('../models/User'); // Asegúrate de la ruta correcta a tu modelo User
 
 // Middleware de protección de ruta para asegurar que el usuario esté logeado
 function ensureAuthenticated(req, res, next) {
@@ -55,7 +55,7 @@ router.post('/registro', async (req, res) => {
         res.redirect('/login'); // Redirige a la página de login
 
     } catch (err) {
-        console.error(err); 
+        console.error(err); // Esto imprimirá el error real en tu terminal del servidor
         req.flash('error_msg', 'Hubo un error al registrarte. Inténtalo de nuevo.');
         res.redirect('/registro');
     }
@@ -126,20 +126,22 @@ router.get('/logout', ensureAuthenticated, (req, res) => {
 
 // Ruta GET para mostrar la página de perfil del usuario
 router.get('/perfil', ensureAuthenticated, (req, res) => {
+    // req.session.user ya contiene los datos actualizados del usuario
     res.render('perfil', { user: req.session.user });
 });
 
 
 // Ruta GET para mostrar el formulario de modificación de perfil
-
+// ¡CAMBIADO: /perfil/modificar!
 router.get('/perfil/modificar', ensureAuthenticated, async (req, res) => {
     try {
+        // Obtenemos el usuario de la base de datos para asegurarnos de tener los datos más recientes
         const user = await User.findById(req.session.user.id);
         if (!user) {
             req.flash('error_msg', 'Usuario no encontrado.');
             return res.redirect('/perfil');
         }
-        
+        // ¡CAMBIADO: renderiza 'modificar-perfil' para que coincida con el nombre de archivo sugerido!
         res.render('modificar-perfil', { user: user });
     } catch (err) {
         console.error(err);
@@ -149,7 +151,7 @@ router.get('/perfil/modificar', ensureAuthenticated, async (req, res) => {
 });
 
 // Ruta POST para manejar la actualización de los datos del perfil
-
+// ¡CAMBIADO: /perfil/modificar!
 router.post('/perfil/modificar', ensureAuthenticated, async (req, res) => {
     const { nombre_completo, correo, password, confirm_password, ciudad, direccion, numero_telefonico } = req.body;
 
@@ -166,11 +168,13 @@ router.post('/perfil/modificar', ensureAuthenticated, async (req, res) => {
         user.ciudad = ciudad;
         user.direccion = direccion;
         user.numero_telefonico = numero_telefonico;
-     
+        // El correo no se actualiza aquí porque se marcó como readonly en el formulario EJS
+        // Si quieres que el correo sea editable, necesitarías un proceso de verificación adicional.
 
         // Si se ingresó una nueva contraseña, validarla y hashearla
         if (password) {
             if (password !== confirm_password) {
+                // ¡IMPORTANTE: La redirección también se cambia a /perfil/modificar!
                 req.flash('error_msg', 'Las nuevas contraseñas no coinciden.');
                 return res.redirect('/perfil/modificar');
             }
@@ -191,10 +195,11 @@ router.post('/perfil/modificar', ensureAuthenticated, async (req, res) => {
         };
 
         req.flash('success_msg', '¡Perfil actualizado con éxito!');
-        res.redirect('/perfil'); 
+        res.redirect('/perfil'); // Redirige de vuelta a la página de perfil después de guardar
 
     } catch (err) {
         console.error(err);
+        // ¡IMPORTANTE: La redirección también se cambia a /perfil/modificar!
         req.flash('error_msg', 'Error al actualizar el perfil.');
         res.redirect('/perfil/modificar');
     }
