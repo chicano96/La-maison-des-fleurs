@@ -89,9 +89,15 @@ app.get('/perfil', ensureAuthenticated, (req, res) => { // Asegúrate de protege
     res.render('perfil');
 });
 
+// Asegúrate de pasar 'user' si lo necesitas en el header/footer
+
+
+
 // **********************************************
 // RUTAS PARA EL CARRITO DE COMPRAS
+// app.js (o donde tengas tus rutas)
 
+// ... tus require, configuración de Express, sesiones, flash, etc. ...
 
 app.get('/formapago', (req, res) => {
     // Es crucial pasar el carrito y el total a la vista
@@ -118,7 +124,8 @@ app.post('/procesar-pago', (req, res) => {
     // TODO:
     // 1. Validar los datos de entrada.
     // 2. Integrar con una pasarela de pago (Stripe, PayPal, MercadoPago, etc.).
-    // 3. Guardar la orden en base de datos (con los productos del carrito, datos de envío, etc.).
+    //    Para un proyecto simple sin pagos reales, puedes simularlo.
+    // 3. Guardar la orden en tu base de datos (con los productos del carrito, datos de envío, etc.).
     // 4. Vaciar el carrito de la sesión.
 
     if (/* pago y orden exitosos */ true) { // Reemplaza 'true' con tu lógica real de éxito
@@ -241,7 +248,7 @@ app.post('/procesar-pago', ensureAuthenticated, async (req, res) => {
             userId: userId,
             productos: productosEnOrden,
             total: total,
-            estado: 'procesando' 
+            estado: 'procesando' // O un estado inicial que prefieras
         });
 
         await newOrder.save();
@@ -267,7 +274,7 @@ app.get('/pedidoconfirmado', ensureAuthenticated, (req, res) => {
 // --- RUTA PARA MOSTRAR EL HISTORIAL DE PEDIDOS DEL USUARIO ---
 app.get('/perfil/mis-pedidos', ensureAuthenticated, async (req, res) => {
     try {
-        const userId = req.session.user.id; 
+        const userId = req.session.user.id; // Obtenemos el ID del usuario logeado
 
         // Buscamos todas las órdenes asociadas a este userId, ordenadas por fecha descendente
         // .lean() convierte los documentos de Mongoose a objetos JavaScript planos para un mejor rendimiento
@@ -275,7 +282,7 @@ app.get('/perfil/mis-pedidos', ensureAuthenticated, async (req, res) => {
 
         res.render('mispedidos', {
             orders: orders,
-            user: req.session.user 
+            user: req.session.user // Pasamos el usuario a la vista si se necesita en el header/footer
         });
 
     } catch (err) {
