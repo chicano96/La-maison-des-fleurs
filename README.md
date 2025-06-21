@@ -3,7 +3,7 @@
 Sigue estos pasos para poner en marcha el proyecto en tu máquina local: 
 1.  **Clona el repositorio** (si aplica) o descarga el código fuente: 
 ```bash 
-git clone <URL_DEL_REPOSITORIO> 
+git clone http://localhost:3000
 cd la-maison-des-fleurs 
 ``` 
 2.  **Instala las dependencias** del proyecto: 
