@@ -2,10 +2,6 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     flex-direction: column;
     background-image: url('/images/fondo.png'); /* Fondo general del sitio */
     background-size: cover;
@@ -13,6 +9,8 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-color: #f4f4f4; /* Color de fallback */
+    overflow-y: scroll;
+    min-height: 100vh;
 }
 
 /* --- 2. Estilos Específicos para la Página de Inicio (fondo-perfumeria-index) --- */
@@ -22,7 +20,7 @@ body.fondo-perfumeria-index {
     background-position: center;
     background-repeat: no-repeat;
     display: block; /* Vuelve a block para la estructura de la página de inicio */
-    min-height: auto; /* Ajusta la altura mínima para el contenido */
+    min-height: 100vh; /* Ajusta la altura mínima para el contenido */
 }
 
 body.fondo-perfumeria-index .container {
@@ -140,7 +138,7 @@ body.fondo-perfumeria-index .button:hover {
 
 .hero-text a {
     display: inline-block;
-    background-color: #ff5500; /* Color de botón llamativo */
+    background-color: #000000; /* Color de botón llamativo */
     color: white;
     padding: 12px 25px;
     border-radius: 30px;
@@ -151,7 +149,7 @@ body.fondo-perfumeria-index .button:hover {
 }
 
 .hero-text a:hover {
-    background-color: #cc4400;
+    background-color: #a3993c;
     transform: translateY(-2px); /* Ligero levantamiento al pasar el ratón */
 }
 
@@ -303,14 +301,14 @@ body.fondo-perfumeria-index .button:hover {
 
 .product-item .price {
     font-size: 1.2em;
-    color: #28a745; /* Verde para el precio */
+    color: #000000; /* Verde para el precio */
     font-weight: bold;
     margin-bottom: 15px;
 }
 
 /* Estilos del botón de compra (buy-button) - consolidado */
 .buy-button {
-    background-color: #28a745; /* Verde de compra */
+    background-color: #c2ca4cbb; /* Verde de compra */
     color: white;
     border: none;
     padding: 12px 25px; /* Padding estandarizado */
@@ -323,7 +321,7 @@ body.fondo-perfumeria-index .button:hover {
 }
 
 .buy-button:hover {
-    background-color: #218838;
+    background-color: #c2ca4c;
 }
 
 /* --- 6. Contenedor de Login (login-container) --- */
@@ -421,10 +419,23 @@ body.fondo-perfumeria-index .button:hover {
 /* --- 7. Contenedor de Pago (payment-container) --- */
 .payment-container {
     background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10 30px rgba(0, 0, 0, 0.15);
     text-align: center;
+    max-width: 550px; 
+    width: 90%; 
+    box-sizing:border-box; /* Para que flexbox calcule mejor el contenido */
+    margin: 20px auto; 
+
+    /* Propiedades para el scroll si el contenido es muy largo */
+    max-height: 80vh; /* Altura máxima del contenedor (80% del viewport height) */
+    overflow-y: auto; /* Habilitar el scroll vertical si el contenido excede max-height */
+    
+    /* Estilos adicionales para un look más limpio */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio entre los bloques principales dentro del contenedor */
 }
 
 .payment-container h2 {
@@ -1145,19 +1156,21 @@ h2, h3, h4 {
 
 h2 {
     font-size: 2.2em;
-    border-bottom: 2px solid #ecd8c0; /* Línea decorativa bajo el título principal */
+    color: #333; /* Un negro/gris oscuro para el título principal */
+    border-bottom: 2px solid #eee; /* Línea más suave */
     padding-bottom: 15px;
     margin-bottom: 30px;
 }
 
 h3 {
     font-size: 1.6em;
-    color: #795548; /* Un tono más claro de marrón */
+    color: #444; /* Un gris oscuro para subtítulos */
+    margin-bottom: 15px; /* Ajuste de margen */
 }
 
 h4 {
     font-size: 1.3em;
-    color: #8d6e63;
+    color: #555; /* Un gris medio */
     margin-top: 30px;
     margin-bottom: 20px;
 }
@@ -1221,6 +1234,11 @@ h4 {
 
 
 /* --- Estilos del Formulario de Pago --- */
+
+.payment-form {
+    width: 100%; /* Asegura que el formulario ocupe el ancho disponible */
+}
+
 .payment-form .form-group {
     margin-bottom: 20px;
     text-align: left; /* Alinea etiquetas y campos a la izquierda */
@@ -1230,36 +1248,39 @@ h4 {
     display: block; /* Cada etiqueta en su propia línea */
     margin-bottom: 8px;
     font-weight: bold;
-    color: #6d4c41; /* Un color ligeramente más claro para las etiquetas */
+    color: #333; /* Un color ligeramente más claro para las etiquetas */
     font-size: 0.95em;
 }
 
 .payment-form input[type="text"] {
-    width: calc(100% - 24px); /* Ancho completo menos padding */
-    padding: 12px;
+    width: 100%; /* Ocupa el 100% del espacio del form-group */
+    padding: 14px; /* Un poco más de padding para campos más grandes */
     border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1em;
-    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+    border-radius: 8px; /* Bordes más redondeados */
+    font-size: 1.05em; /* Un poco más grande la fuente dentro del campo */
+    box-sizing: border-box;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #f9f9f9; /* Fondo ligeramente gris para los inputs */
+    color: #333; /* Color de texto para el input */
 }
 
 .payment-form input[type="text"]:focus {
-    border-color: #a1887f; /* Color de borde al enfocar */
-    box-shadow: 0 0 0 3px rgba(161, 136, 127, 0.2); /* Sombra suave al enfocar */
-    outline: none; /* Elimina el contorno predeterminado del navegador */
+    border-color: #007bff; /* Color de borde azul al enfocar (o un color que combine con tu marca) */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Sombra de enfoque */
+    outline: none;
+    background-color: #fff; /* Fondo blanco al enfocar */
 }
 
 .payment-form .form-row {
     display: flex;
     justify-content: space-between;
-    gap: 20px; /* Espacio entre los campos en la misma fila */
+    gap: 20px;
     margin-bottom: 20px;
 }
 
 .payment-form .form-row .form-group {
-    flex: 1; /* Distribuye el espacio equitativamente */
-    margin-bottom: 0; /* Elimina margen inferior extra si el form-row ya lo tiene */
+    flex: 1;
+    margin-bottom: 0;
 }
 
 /* --- Estilos para los botones (asumiendo .btn y .btn-primary existentes) --- */
@@ -1277,13 +1298,20 @@ h4 {
 }
 
 .btn-primary {
-    background-color: #795548; /* Un marrón más oscuro */
+    background-color: #28a745; /* Un verde más vibrante para acción principal */
     color: white;
+    padding: 15px 30px; /* Más padding para que sea más fácil de clickear */
+    border-radius: 8px;
+    font-size: 1.15em; /* Un poco más grande */
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2); /* Sombra para destacarlo */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #5d4037; /* Tono más oscuro al pasar el ratón */
-    transform: translateY(-2px); /* Efecto ligero de elevación */
+    background-color: #218838; /* Tono más oscuro al pasar el ratón */
+    transform: translateY(-3px); /* Mayor efecto de elevación */
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
 }
 
 .btn-secondary { /* Si usas este para "Ver mis Pedidos" en la confirmación */
@@ -1305,16 +1333,16 @@ h4 {
 .payment-form p {
     font-size: 1em;
     line-height: 1.6;
-    color: #666;
+    color: #444;
     margin-bottom: 10px;
 }
 
 .payment-form p strong {
-    color: #444;
+    color: #222;
 }
 
 .payment-form p a {
-    color: #795548; /* Color de enlace que combine con el tema */
+    color: #007bff; /* Un color de enlace estándar y visible */
     text-decoration: none;
     font-weight: bold;
 }
@@ -1446,4 +1474,101 @@ h4 {
     .order-list {
         grid-template-columns: 1fr; /* Una columna en pantallas muy pequeñas */
     }
+}
+
+/* Estilos para la pantalla de inicio (splash screen) */
+#splash-screen {
+    position: fixed; /* Hace que cubra toda la ventana del navegador */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f7f0e9; /* Elige un color de fondo que combine con tu marca o GIF */
+    display: flex; /* Para centrar el GIF */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    z-index: 9999; /* Asegura que esté por encima de todo lo demás */
+}
+
+#splash-screen img {
+    max-width: 70%; /* Ajusta el tamaño según sea necesario */
+    max-height: 70vh; /* Altura de la ventana, para que quepa incluso en pantallas más pequeñas */
+    object-fit: contain; /* Asegura que el GIF se escale sin distorsionarse */
+}
+
+/* Opcional: Añade una animación de desvanecimiento para una transición más suave */
+.fade-out {
+    animation: fadeOut 1s forwards; /* Duración de 1 segundo, se mantiene en el estado final */
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; visibility: hidden; } /* `visibility: hidden` lo elimina del diseño */
+}
+
+/* --- Tus estilos existentes para .container, h1, .logo-index, .button-container, .button van aquí --- */
+
+
+
+
+/* --- Estilos para la Introducción con Animación --- */
+
+body {
+    margin: 0;
+    overflow: hidden; /* Oculta barras de desplazamiento durante la animación */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
+    background-color: #000; /* Fondo negro mientras la imagen se expande */
+}
+
+.intro-container {
+    width: 100%;
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Importante para que la imagen no se salga de los límites mientras escala */
+}
+
+.intro-image {
+    width: 10%; /* Empieza muy pequeña (o el porcentaje que quieras) */
+    height: auto; /* Mantiene la proporción */
+    object-fit: cover; /* Recorta la imagen para cubrir el área sin deformar si es necesario */
+    opacity: 0; /* Empieza invisible */
+    transform: scale(0); /* Empieza muy pequeña */
+    transition: none; /* Asegura que no haya transiciones iniciales no deseadas */
+}
+
+.intro-image.animate-reveal {
+    animation: revealImage 6s forwards; /* Aplica la animación durante 6 segundos */
+}
+
+@keyframes revealImage {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+        width: 10%; /* Comienza pequeño */
+    }
+    10% {
+        opacity: 1; /* Se vuelve visible rápidamente */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1); /* Escala al 100% de su tamaño, cubriendo el contenedor */
+        width: 100vw; /* Abarca todo el ancho de la ventana */
+        height: 100vh; /* Abarca todo el alto de la ventana */
+        object-fit: cover; /* Asegura que la imagen cubra todo sin deformarse */
+    }
+}
+/* --- Nuevo Wrapper para Centrar el Contenedor de Pago --- */
+.payment-container-wrapper {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+    min-height: calc(100vh - var(--navbar-height) - var(--footer-height)); /* Ajusta la altura para centrar, asumiendo que nav y footer tienen altura */
+    /* Puedes ajustar --navbar-height y --footer-height con variables CSS o valores fijos si los conoces */
+    padding: 20px; /* Padding para que el contenido no se pegue a los bordes */
+    box-sizing: border-box; /* Incluye padding en el tamaño total */
 }
