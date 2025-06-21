@@ -3,6 +3,7 @@ LA-MAISON-DES-FLEURS: Tienda Online de Perfumes
 👥 Integrantes del Equipo
 
 MATURÍN LAO, CESAR IVAN.
+
 VALENZUELA BENITEZ, JOSE IGNACIO.
 
 Culiacán, Sinaloa, México. Junio de 2025.
